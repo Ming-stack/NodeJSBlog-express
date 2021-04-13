@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # NodeJS开发简易博客系统
 ## 技术要点
 - Node.js
@@ -34,3 +35,6 @@
 - 项目启动演示
 
 ![kBlvMF.gif](https://s2.ax1x.com/2019/02/14/kBlvMF.gif)
+=======
+# js-demo
+>>>>>>> 3e08e8dd70d50d55f96f1337f028be0a3bedee01
