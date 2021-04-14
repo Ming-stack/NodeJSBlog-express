@@ -1,0 +1,42 @@
+<%- include('../layouts/admin/head', { title: '首页' }) %>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+      <label class="layui-form-label">标题</label>
+      <div class="layui-input-block">
+        <input id="title" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button id="btn" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+  </form>
+  <style>
+      .layui-unselect{
+          z-index: 10002;
+      }
+  </style>
+  <script src="/static/jquery/jquery.js"></script>
+  <script>
+   
+      $('#btn').click(function (e) {
+          e.preventDefault();
+          let form = new FormData()
+          form.append('name', $('#name').val());
+          $.ajax({
+              url: '/api/categories',
+              type: 'post',
+              data: form,
+              processData: false,
+              contentType: false,
+              success(data){
+                  if(data.code){
+                    location.reload();
+                  }
+              }
+          })
+      })
+  </script>
+<%- include('../layouts/admin/foot') %>

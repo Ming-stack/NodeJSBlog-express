@@ -1,32 +1,14 @@
 {
-  "name": "blog",
-  "version": "1.0.0",
-  "private": true,
-  "description": "A Simple Blog WebProject",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "cookies": "^0.7.1",
-    "silly-datetime": "^0.1.2",
-    "swig": "^1.4.2",
-    "mongoose": "^5.12.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://gitee.com/ittqqzz/NodeJSBlog.git"
-  },
-  "devDependencies": {
-    "express": "^5.0.0-alpha.8",
-    "express-handlebars": "^5.3.0",
+    "cookie-parser": "^1.4.5",
+    "cookies": "^0.8.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
     "express-jwt": "^6.0.0",
-    "handlebars": "^4.7.7",
-    "handlebars-layouts": "^3.1.4",
-    "jsonwebtoken": "^8.5.1"
+    "joi": "^17.4.0",
+    "joi-oid": "^1.1.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.3",
+    "multer": "^1.4.2"
   }
 }
