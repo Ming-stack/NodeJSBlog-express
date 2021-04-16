@@ -1,37 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('layouts/index/head', { title: '首页' }); %>
+    <style>
+        .article {
+            background-color: rgba(255,255,255,.9);
+            padding: 20px;
+        }
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Document</title>
-    <link rel="stylesheet" href="/static/layui/css/layui.css">
-    
-</head>
+        .article .media-object {
+            width: 200px;
+        }
+    </style>
+    <div class="container content">
 
-<body>
-    <%- include('layouts/index/nav') %>
-    <div class="layui-container">
-        <% list.forEach(item=> { %>
-            <div class="layui-card">
-                <div class="layui-card-header">
-                    <a style="display: block;" href="/details/<%= item._id %>">
-                        <%= item.title %>
+        <% list.forEach(item => { %>
+            <div class="media article">
+                <div class="media-left">
+                    <a href="/detail/<%=item._id%>">
+                        <img class="media-object" src="<%=item.cover %>" alt="...">
                     </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="/detail/<%=item._id%>"><%=item.title%></a></h4>
+                    <%= item.desc %>
                 </div>
             </div>
         <% }) %>
+
+        <!-- <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav> -->
     </div>
-
-    <script src="/static/layui/layui.js"></script>
-    <script>
-        //JavaScript代码区域
-        layui.use('element', function () {
-            var element = layui.element;
-
-        });
-    </script>
-</body>
-
-</html>
+    <%- include('layouts/index/foot'); %>

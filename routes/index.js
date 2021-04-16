@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var Article = require('../models/article')
 var Categories = require('../models/categories')
+var userController = require('../controller/user')
 
 router.get('/', (req, res) => {
     Article.find((err, docs) => {
@@ -13,15 +14,12 @@ router.get('/', (req, res) => {
         })
     }).populate('categories')
 })
-router.get('/details/:id', (req, res) => {
+router.get('/detail/:id', (req, res) => {
     Article.findById(req.params.id, (err, docs) => {
-        res.render('details', {
+        res.render('detail', {
             data: docs
         });
-    }).populate('categories')
-})
-router.get('/details', (req, res) => {
-    res.render('details');
+    })
 })
 router.get('/login', (req, res) => {
     res.render('login');

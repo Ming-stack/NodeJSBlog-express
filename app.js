@@ -3,6 +3,7 @@ const app = express()
 const expressJwt = require('express-jwt');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
+const fileUpload = require('express-fileupload')
 
 const routes = {
     admin: require('./routes/admin'),
@@ -17,14 +18,16 @@ const config = {
     base: require('./config/index'),
 };
 app.use(cookieParser())
-
+app.use(fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 },
+    createParentPath: true
+}));
 app.use(expressJwt({
     secret: 'shhhhhhared-secret', algorithms: ['HS256'],
     getToken: function fromHeaderOrQuerystring(req) {
         return req.cookies.token;
     }
 }).unless({ path: [/\/(api|static|login|register)/, '/', /\/details*/] }));
-
 app.set('view engine', 'ejs')
 app.set('views', './views');
 app.use(express.urlencoded({ extended: true }));

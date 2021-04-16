@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports ={
     mongodbUrl: 'mongodb://localhost:27017/NodeJSBlog',
     ok: {
@@ -7,5 +8,6 @@ module.exports ={
     no: {
         code: 0,
         msg: "NO"
-    }
+    },
+    root: __dirname
 }

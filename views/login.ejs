@@ -1,58 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('layouts/index/head', { title: '登录' }); %>
+    <style>
+        .article {
+            background-color: rgba(255, 255, 255, .9);
+            padding: 20px;
+        }
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登录</title>
-    <link rel="stylesheet" href="/static/layui/css/layui.css">
-
-</head>
-
-<body class="layui-container">
-        <%- include('layouts/index/nav') %>
-        <div class="layui-col-md8">
-            <form class="layui-form" action="">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">用户名</label>
-                    <div class="layui-input-block">
-                        <input id="username" type="text" name="username" required lay-verify="required"
-                            placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                    </div>
+        .article .media-object {
+            width: 200px;
+        }
+    </style>
+    <div class="container content">
+        <form method="POST" class="form-horizontal">
+            <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">Username</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="username" placeholder="Username">
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">密码</label>
-                    <div class="layui-input-block">
-                        <input id="password" type="password" name="password" required lay-verify="required"
-                            placeholder="请输入密码" autocomplete="off" class="layui-input">
-                    </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="password" placeholder="Password">
                 </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button id="btn" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button id="btn" type="submit" class="btn btn-default">Sign in</button>
                 </div>
-            </form>
-        </div>
-        <script src="/static/jquery/jquery.js"></script>
-        <script>
-            $('#btn').click((e) => {
-                e.preventDefault();
-                $.ajax({
-                    url: '/api/login',
-                    type: 'post',
-                    data: {
-                        username: $('#username').val(),
-                        password: $('#password').val()
-                    },
-                    success(res) {
-                       location.href = '/admin'
-                    }
-                })
+            </div>
+        </form>
+    </div>
+    <script>
+        $('#btn').click((e) => {
+            e.preventDefault();
+            $.ajax({
+                url: '/api/login',
+                type: 'post',
+                data:{
+                    username: $('#username').val(),
+                    password: $('#password').val(),
+                },
+                success(res) {
+                    alert('登录成功')
+                    location.reload();
+                }
             })
-        </script>
-</body>
+        })
 
-</html>
+    </script>
+    <%- include('layouts/index/foot'); %>

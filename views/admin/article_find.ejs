@@ -1,40 +1,49 @@
-<%- include('../layouts/admin/head', { title: '首页' }) %>
-<table class="layui-table">
-    <colgroup>
-      <col width="150">
-      <col width="200">
-      <col>
-    </colgroup>
-    <thead>
-      <tr>
-        <th>标题</th>
-        <th>分类</th>
-        <th>操作</th>
-      </tr> 
-    </thead>
-    <tbody>
+<%- include('../layouts/admin/head', { title: '查看文章' }); %>
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>标题</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table> 
+</div>
+<script>
+      $.ajax({
+            url: '/api/article',
+            type: 'get',
+            success(res) {
+                _render(res.data)
+            }
+        })
 
-      <% list.forEach(item => { %>
-          <tr>
-            <td><%= item.title %></td>
-            <td><%= item.categories.name %></td>
-            <td><button data-id="<%= item._id %>" class="layui-btn layui-btn-danger btn-delete"
-                >删除</button></td>
-          </tr>
-      <% }) %>
-    </tbody>
-  </table>
+        $('body').on('click', '.btn-danger', function () {
+            deleteRequest(`/api/article/${this.id}`)
+            .then(data => {
+                alert('删除成功')
+                location.reload();
+            })
+        })
 
-  <script src="/static/jquery/jquery.js"></script>
-  <script>
-     $('html').on('click', '.btn-delete', function () {
-         $.ajax({
-             type: 'delete',
-             url: '/api/article/'+$(this).data('id'),
-             success({code}){
-                 if(code) location.reload()
-             }
-         })
-     })
-  </script>
-<%- include('../layouts/admin/foot') %>
+        function deleteRequest(url) {
+            return $.ajax({
+                url,
+                type: 'DELETE'
+            })
+        }
+
+        function _render(list) {
+            list.forEach(item => {
+                $('tbody').append(`
+                    <tr>
+                        <td>${item.title}</td>
+                        <td>
+                            <button id="${item._id}" class="btn btn-danger">删除</button>
+                        </td>
+                    </tr>
+            `)
+            })
+        }
+</script>

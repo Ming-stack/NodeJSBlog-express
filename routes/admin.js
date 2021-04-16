@@ -17,11 +17,7 @@ router.get('/categories_find', (req, res) => {
     })
 })
 router.get('/article_add', (req, res) => {
-    Categories.find((err, docs) => {
-        res.render('admin/article_add', {
-            categories: docs
-        });
-    })
+    res.render('admin/article_add');
 })
 router.get('/article_find', (req, res) => {
     Article.find((err, docs) => {

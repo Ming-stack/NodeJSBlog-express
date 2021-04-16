@@ -1,19 +1,12 @@
-</div>
-</div>
-
-<div class="layui-footer">
-  <!-- 底部固定区域 -->
-  底部固定区域
-</div>
-</div>
-
-<script src="/static/layui/layui.js"></script>
 <script>
-//JavaScript代码区域
-layui.use('element', function(){
-var element = layui.element;
-
-});
+    $('#logout').click(() =>{
+        $.ajax({
+            url: '/api/logout',
+            success(){
+                location.reload()
+            }
+        })
+    })
 </script>
 </body>
 </html>
