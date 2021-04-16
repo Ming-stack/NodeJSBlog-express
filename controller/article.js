@@ -1,18 +1,25 @@
 const config = require('../config');
 const Article = require('../models/article')
-// const Joi = require('joi-oid')
-// const schema = Joi.object({
-//   categories: Joi.objectId(),
-//   title: Joi.string(),
-//   content: Joi.number().min(18),
-// });
-// schema.validate({ 
-//     title:'w' ,
-//     content: true
-// }).error.details[0].message
+const Joi = require('joi-oid')
+const articleJoi = Joi.object({
+  categories: Joi.objectId(),
+  title: Joi.string(),
+  content: Joi.string(),
+  pubdate: Joi.string(),
+  desc: Joi.string(),
+  cover: Joi.string()
+});
+
 module.exports = {
-    add(req, res, next) {
+    async add(req, res, next) {
+        
         req.body.content = req.body.content.replace(/"/g, '\\"')
+        try {
+            await articleJoi.validateAsync(req.body);
+        }
+        catch (err) { 
+            return res.send({code: 500, error: err.details[0].message})
+        }
         const data = new Article(req.body);
         data.save().then(() => {
             res.send(config.ok)

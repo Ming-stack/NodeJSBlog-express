@@ -7,10 +7,14 @@ var userController = require('../controller/user')
 router.get('/', (req, res) => {
     Article.find((err, docs) => {
         Categories.find((err, docs2)=> {
-            res.render('index', {
-                list: docs,
-                categories: docs2
-            });
+            Article.count().then(count => {
+                res.render('index', {
+                    list: docs.slice((req.query.page - 1) * 4, req.query.page * 4),
+                    categories: docs2,
+                    count,
+                    currentPage: req.query.page || 1
+                });
+            })
         })
     }).populate('categories')
 })

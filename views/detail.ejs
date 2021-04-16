@@ -1,16 +1,46 @@
 <%- include('layouts/index/head', { title: '首页' }); %>
+    <link rel="stylesheet" href="/static/syntaxhighter/shCoreDefault.css">
     <style>
         .article {
-            background-color: rgba(255,255,255,.9);
+            background-color: rgba(255, 255, 255, .9);
             padding: 20px;
         }
 
         .article .media-object {
             width: 200px;
         }
-    </style>
-    <div class="container content">
-        <%- data.content %>
 
+        .content {
+            padding-top: 40px;
+        }
+
+        .content .container {
+            box-shadow: 1px 1px 10px #ccc;
+            padding: 0;
+            background-color: #fff;
+        }
+
+        pre {
+            border: 0;
+            margin: 0;
+            background-color: #fff;
+        }
+    </style>
+    <div class="content">
+        <div class="container">
+            <%- data.content %>
+        </div>
     </div>
-<%- include('layouts/index/foot'); %>
+    <script src="/static/syntaxhighter/shCore.js"></script>
+    <script src="/static/syntaxhighter/shBrushJScript.js"></script>
+    <script src="/static/syntaxhighter/shBrushCss.js"></script>
+    <script src="/static/syntaxhighter/shBrushXml.js"></script>
+    <script src="/static/syntaxhighter/shBrushSql.js"></script>
+    <script src="/static/syntaxhighter/shBrushPhp.js"></script>
+    <script>
+        $('pre').each(function(){
+            this.className = this.className.replace(/\\"/g, '').split(';')[0]
+        })
+        SyntaxHighlighter.all();
+    </script>
+    <%- include('layouts/index/foot'); %>

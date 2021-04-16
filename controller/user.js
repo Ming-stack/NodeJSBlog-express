@@ -34,9 +34,11 @@ module.exports = {
                         exp: Math.floor(Date.now() / 1000) + (60 * 60),
                         data: arr[0]
                     }, 'shhhhhhared-secret');
-
-                    cookies.set('token', token)
-
+                    let d = new Date();
+                    d.setHours(d.getHours() + 1)
+                    cookies.set('token', token,{
+                        expires: d
+                    })
                     res.send({ ...config.ok })
                 } else {
                     res.send(config.no)

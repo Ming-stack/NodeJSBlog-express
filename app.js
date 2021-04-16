@@ -4,7 +4,7 @@ const expressJwt = require('express-jwt');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
-
+    
 const routes = {
     admin: require('./routes/admin'),
     index: require('./routes/index'),
@@ -26,7 +26,7 @@ app.use(expressJwt({
     secret: 'shhhhhhared-secret', algorithms: ['HS256'],
     getToken: function fromHeaderOrQuerystring(req) {
         return req.cookies.token;
-    }
+    }   
 }).unless({ path: [/\/(api|static|login|register)/, '/', /\/details*/] }));
 app.set('view engine', 'ejs')
 app.set('views', './views');
